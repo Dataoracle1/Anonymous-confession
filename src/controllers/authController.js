@@ -104,3 +104,23 @@ export const logout = (req, res) => {
     message: 'Logout successful' 
   });
 };
+
+export const getMe = async (req, res) => {
+  try {
+    const user = req.user;
+    res.json({
+      success: true,
+      data: {
+        id: user._id,
+        username: user.username,
+        email: user.email
+      }
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: 'Server error',
+      error: error.message
+    });
+  }
+};
