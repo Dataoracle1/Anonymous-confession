@@ -16,8 +16,13 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(cookieParser());
+
+
 app.use(cors({
-    origin: "http://localhost:5173",
+    origin: [
+        "http://localhost:5173",
+        "https://anonymous-confession-iota.vercel.app"
+    ],
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true
 }));
@@ -26,8 +31,8 @@ app.use(cors({
 await connectDB();
 
 
-app.use(authRouter);
-app.use(confessionRouter);
+app.use('/api', authRouter);
+app.use('/api', confessionRouter);
 
 
 app.get('/', (req, res) => {
