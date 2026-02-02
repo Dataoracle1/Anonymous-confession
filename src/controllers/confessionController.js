@@ -3,7 +3,7 @@ import Confession from '../models/confessionModel.js';
 export const getAllConfessions = async (req, res) => {
   try {
     const confessions = await Confession.find()
-      .select('title body createdAt')
+      .select('_id title body createdAt')  
       .sort({ createdAt: -1 });
 
     res.json({ 
@@ -94,7 +94,7 @@ export const deleteConfession = async (req, res) => {
 export const getUserConfessions = async (req, res) => {
   try {
     const confessions = await Confession.find({ user: req.user.id })
-      .select('title body createdAt')
+      .select('_id title body createdAt') 
       .sort({ createdAt: -1 });
 
     res.json({
