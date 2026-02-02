@@ -11,12 +11,10 @@ dotenv.config();
 
 const app = express();
 
-
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(cookieParser());
-
 
 app.use(cors({
     origin: [
@@ -28,13 +26,10 @@ app.use(cors({
     credentials: true
 }));
 
-
 await connectDB();
-
 
 app.use('/api', authRouter);
 app.use('/api', confessionRouter);
-
 
 app.get('/', (req, res) => {
   res.json({ 
@@ -42,7 +37,6 @@ app.get('/', (req, res) => {
     message: '🎭 Anonymous Confessions API is running!'
   });
 });
-
 
 if (process.env.NODE_ENV !== "production") {
   app.listen(5000, () => {
